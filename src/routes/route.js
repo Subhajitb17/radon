@@ -15,12 +15,13 @@ router.get('/test-me', function (req, res) {
     myHelper.myDate()
     myHelper.myMonth()
     myHelper.getBatchInfo()
-    res.send('My first ever api!')
-
+    
     //Problem-3
     forMatter.trim()
     forMatter.changeToUpperCase()
-    forMatter.changetoLowerCase()
+    forMatter.changeToLowerCase()
+    
+    res.send('My first ever api!')
 });
 
 module.exports = router;

@@ -1,16 +1,16 @@
 const trim = function() {
-    const a=" functionup"
+    const a="   FunctionUp  "
     const forTrim=a.trim();  
     console.log(forTrim)
 } 
 
-const changetoLowerCase = function(){
+const changeToUpperCase = function(){
     const b="function up"
     const forUpperCase=b.toUpperCase()
     console.log(forUpperCase)
 }
 
-const changeToUpperCase = function(){
+const changeToLowerCase = function(){
     const c="FUNCTION UP"
     const forLowerCse=c.toLowerCase()
     console.log(forLowerCse)
@@ -19,5 +19,5 @@ const changeToUpperCase = function(){
     
 
 module.exports.trim = trim
-module.exports.changetoLowerCase = changetoLowerCase
 module.exports.changeToUpperCase = changeToUpperCase
+module.exports.changeToLowerCase = changeToLowerCase
