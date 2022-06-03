@@ -1,68 +1,92 @@
 const express = require('express');
 const underscore = require('underscore');
 const lodash = require('lodash');
-const _ = require("lodash")
 
 
 const router = express.Router();
 
-const myLogger = require('../logger/logger')
-const myHelper = require('../util/helper')
-const forMatter = require('../validator/formatter')
 
-router.get('/test-me', function (req, res) {
+//pritesh Sir assignment
+//Question: 1
+router.get("/missingNumber1", function (req, res) {
+    let arr1 = [1, 2, 3, 5, 6, 7]
+    let missingNumber1;
+    for (let i = 0; i < arr1.length - 1; i++) {
+      if (arr1[i] + 1 != arr1[i + 1]) {
+        missingNumber1 = arr1[i] + 1
+      }
+  
+    }
+    res.send({ Data: "Missing number is: " + missingNumber1 })
+  })
+  
+  //Question: 2
+  router.get("/missingNumber2", function (req, res) {
+    let arr2 = [33, 34, 35, 37, 38]
+    let missingNumber2;
+    for (let i = 0; i < arr2.length - 1; i++) {
+      if (arr2[i] + 1 != arr2[i + 1]) {
+        missingNumber2 = arr2[i] + 1
+      }
+  
+    }
+    res.send({ Data: "Missing number is: " + missingNumber2 })
+  })
 
-    // Problem- 1
-    myLogger.welcome()
 
-    //Problem-2
-    myHelper.myDate()
-    myHelper.myMonth()
-    myHelper.getBatchInfo()
+//Assignment: 2----- Sabiha Ma'am Assignment
+//Question: 1
+const moviesName = ["Rang de basanti", "The shining", "Lord of the rings", "Batman begins"]
 
-    //Problem-3
-    forMatter.trim()
-    forMatter.changeToUpperCase()
-    forMatter.changeToLowerCase()
+router.get('/movies', function (req, res) {
 
-    let firstElement = underscore.first(["subhajit", "souhardya", "reet"])
-    console.log("The first element received from underscore function is " + firstElement)
-
-    res.send('My first ever api!')
+  res.send({ Movies: moviesName })
 });
 
+//Question: 2 & 3
+router.get('/movies/:indexNumber', function (req, res) {
+  let x = req.params.indexNumber;
+  if (x > moviesName.length) {
+    res.send("Use a Valid Index")
+  }
+  else {
+    res.send({ moviesName: "The movie is " + moviesName[x] })
+  }
+})
 
-//Problem-4
-router.get('/hello', function (req, res) {
+//Question: 4
+const arrMovie = [{
+  "id": 1,
+  "name": "The Shining"
+}, {
+  "id": 2,
+  "name": "Incendies"
+}, {
+  "id": 3,
+  "name": "Rang de Basanti"
+}, {
+  "id": 4,
+  "name": "Finding Nemo"
+}]
 
-    //Chunk
-    const monthsList = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    const chunkList = console.log(_.chunk(monthsList, 3));
+router.get('/flims', function (req, res) {
+  res.send({ Flims: arrMovie })
+})
 
-    //Tail
-    const oddNumber = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
-    const byTail = console.log(_.tail(oddNumber));
-
-    //Union
-    const arr1 = [1, 2, 3, 4]
-    const arr2 = [3, 4, 5, 6]
-    const arr3 = [5, 5, 6, 7, 8]
-    const arr4 = [1, 2, 8, 7, 3]
-    const arr5 = [9, 11, 4]
-
-    const byUnion = _.union(arr1, arr2, arr3, arr4, arr5);
-    console.log(byUnion)
-
-
-    //forParis
-    const moviesPairObject = lodash.fromPairs([["Horror", "The Shining"], ["Drama", "Titanic"], ["Thriller", "Shutter Island"], ["Fantasy", "Pans Labyrinth"]])
-    console.log(moviesPairObject);
+//Question: 5
+router.get('/flims/:filmId', function (req, res) {
+  let x = req.params.filmId
 
 
-
-
-    res.send('My Hello api!')
-});
+  if (x > arrMovie.length) {
+    res.send("No movie exists with this id")
+  }
+  else {
+    let y = JSON.stringify(arrMovie[x])
+    let z = y.replace(/\\/g, 'br');
+    res.send(z)
+  }
+})
 
 
 module.exports = router;
