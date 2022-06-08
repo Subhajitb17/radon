@@ -46,8 +46,34 @@ const booksCost = async function(req,res){
     res.send({msg: author_name})
 }
 
+
+// Optional assignment
+
+let books_by_authorid =async(req,res)=>{
+    let myData=await bookModel.find({author_id:req.params.id})
+    data=myData.map((obj)=>obj.name)
+    res.send({msg:data})
+    
+}
+
+let getNameAge= async(req,res)=>{
+    let data=await authorModel.find({age:{$gt:50}}).select({ author_id:1, author_name:1, age:1, _id:0})
+
+    let autIdArr= data.map((obj)=>obj.author_id)
+
+    let bookData=await bookModel.find({$and:[{author_id:{$in:autIdArr}},{ratings:{$gt:4}}]})
+
+    bookData=bookData.map((obj)=>obj.author_id)
+
+    data=await authorModel.find({author_id:{$in:bookData}}).select({author_name:1,age:1,_id:0})
+    res.send({msg:data})
+}
+
+
 module.exports.createBook= createBook;
 module.exports.createAuthor = createAuthor;
 module.exports.getBooksByChetanBhagat = getBooksByChetanBhagat;
 module.exports.updateBookPrice = updateBookPrice;
-module.exports.booksCost = booksCost
+module.exports.booksCost = booksCost;
+module.exports.books_by_authorid=books_by_authorid
+module.exports.getNameAge=getNameAge
