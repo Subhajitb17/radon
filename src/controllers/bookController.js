@@ -51,7 +51,7 @@ const booksCost = async function(req,res){
 
 let books_by_authorid =async(req,res)=>{
     let myData=await bookModel.find({author_id:req.params.id})
-    data=myData.map((obj)=>obj.name)
+    let data=myData.map((obj)=>obj.name)
     res.send({msg:data})
     
 }
